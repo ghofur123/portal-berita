@@ -1,0 +1,45 @@
+.form-input-class-all {
+    display: none;
+    /* position: fixed; */
+    z-index: 10;
+    margin-right: 100px;
+}
+.progress {
+    display: none;
+}
+.check-box-class {
+    width: 50px;
+    padding: 50px;
+}
+.alert-information {
+    display: none;
+    position: fixed;
+    width: 50%;
+    right: 10px;
+    top: 10px;
+    z-index: 7;
+    /* border: 1px solid #000; */
+    box-shadow: 0 0 3px 0 #000;
+}
+.row-login-pages {
+    border: #000 1px solid;
+    border-radius: 5px;
+    background: rgb(199, 68, 68);
+}
+.class-form-input-card1 {
+    display: none;
+}
+.cls-form-bg {
+    width: 25%;
+}
+
+/*  */
+
+.nav-second-level {
+    display: none;
+    position: relative;
+}
+.transtition-show-click{
+    transition: 10s;
+    border: 1px solid #fff;
+}
