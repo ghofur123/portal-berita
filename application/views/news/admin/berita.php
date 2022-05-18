@@ -30,7 +30,7 @@
                     </div>
                     <div class='form-group col-md-3'>
                         <label>Status publikasi</label>
-                        <select name="status_publikasi" class="form-control">
+                        <select  name="status_publikasi" class="form-control">
                             <option value="">Pilih Status</option>
                             <option value="aktif">aktif</option>
                             <option value="pending">pending</option>
@@ -45,9 +45,21 @@
                         <label>Tags</label>
                         <input type='text' name='tags_id' class='tags_id form-control' placeholder='tags_id' />
                     </div>
+                    
                     <div class='form-group col-md-3'>
                         <label>Gambar</label>
                         <input type='file' name='gambar' class='gambar form-control' placeholder='gambar' />
+                    </div>
+                    <div class='form-group col-md-12'>
+                        <label>Content</label>
+                        <select  name="content" class="form-control">
+                            <option value="0">Pilih Content</option>
+                            <option value="top">top</option>
+                            <option value="slider">slider</option>
+                            <option value="side">side</option>
+                            <option value="populer">populer</option>
+                            <option value="0">none</option>
+                        </select>
                     </div>
                     <div class='form-group'>
                         <label>Deskripsi</label>
@@ -101,6 +113,11 @@
                         <label>Gambar</label>
                         <input type='file' name='gambar_edit' class='gambar form-control' placeholder='gambar' />
                     </div>
+                    <div class='form-group col-md-12'>
+                        <label>Content</label>
+                        <select  name="content_edit" class="content_edit form-control">
+                        </select>
+                    </div>
                     <div class='form-group'>
                         <div class="class-images-view"></div>
                     </div>
@@ -122,30 +139,10 @@
     <div class='col-md-12'>
         <div class='panel panel-default'>
             <div class='panel-heading form-inline'>
-                <div class="input-group">
-                    <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
-                    <div class="input-group-addon" style='cursor:pointer;'>Cari...</div>
-                </div>
             </div>
             <div class='panel-body'>
                 <div class='table-responsive'>
-                    <table class='table table-hover table-data-class'>
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Kontributor</th>
-                                <th>Editor</th>
-                                <th>Tgl</th>
-                                <th>Title</th>
-                                <th>Kategori</th>
-                                <th>Status</th>
-                                <th>act</th>
-                            </tr>
-                        </thead>
-                        <tbody class='class-berita-view-data'>
-
-                        </tbody>
-                    </table>
+                    <div class="class-berita-view-data"></div>
                 </div>
             </div>
         </div>

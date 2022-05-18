@@ -6,7 +6,6 @@
     <title>admin</title>
 
     <!-- BOOTSTRAP STYLES-->
-    <link href="<?php base_url(); ?>../assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FONTAWESOME STYLES-->
     <link href="<?php base_url(); ?>../assets/css/font-awesome.css" rel="stylesheet" />
     <!--CUSTOM BASIC STYLES-->
@@ -16,8 +15,9 @@
     <link href="<?php base_url(); ?>../assets/css/style.css" rel="stylesheet" />
     <!-- GOOGLE FONTS-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-    
-    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css"> -->
+    <!-- datatables -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap.min.css">
 </head>
 <body>
     <div id="wrapper">

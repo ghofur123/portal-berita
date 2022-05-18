@@ -31,7 +31,7 @@ class Berita_api extends CI_Controller
                     );
                 }
                 $response      = array();
-                $queryDataRead = $this->crud_function_model->selectJoinFourTable('a.*, b.`nama_user` AS editor_nm, c.`nama_user` AS kontributor_nm, d.`title` AS title_kategori', 'berita a', 'user b', 'a.`editor` = b.`uniq_user`', '', 'user c', 'a.`kontributor` = c.`uniq_user`','', 'kategori d', 'a.`kategori_id` = d.`uniq_kategori`', '', '', '');
+                $queryDataRead = $this->crud_function_model->selectJoinFourTable('a.*, b.`nama_user` AS editor_nm, c.`nama_user` AS kontributor_nm, d.`title` AS title_kategori', 'berita a', 'user b', 'a.`editor` = b.`uniq_user`', '', 'user c', 'a.`kontributor` = c.`uniq_user`','', 'kategori d', 'a.`kategori_id` = d.`uniq_kategori`', '', $whereParam, 'a.`id_berita` DESC');
                 foreach ($queryDataRead as $item) {
                     $berita = array(
                         'id_berita' => $item['id_berita'],
@@ -50,7 +50,8 @@ class Berita_api extends CI_Controller
                         'komentar_reaksi' => $item['komentar_reaksi'],
                         'title_kategori' => $item['title_kategori'],
                         'editor_nm' => $item['editor_nm'],
-                        'kontributor_nm' => $item['kontributor_nm']
+                        'kontributor_nm' => $item['kontributor_nm'],
+                        'content' => $item['content']
                     );
                     array_push($response, $berita);
                 }
@@ -58,17 +59,15 @@ class Berita_api extends CI_Controller
             } else if ($_GET['act'] == 'insert') {
                 $response = array();
                 $this->form_validation->set_rules('uniq_berita', 'uniq_berita', 'required');
-                // $this->form_validation->set_rules('user_id', 'user_id', 'required');
-                // $this->form_validation->set_rules('tgl', 'tgl', 'required');
                 $this->form_validation->set_rules('title', 'title', 'required');
-                $this->form_validation->set_rules('kategori_id', 'kategori_id', 'required');
+                $this->form_validation->set_rules('kategori_id', 'Kategori', 'required');
                 $this->form_validation->set_rules('editor', 'editor', 'required');
                 $this->form_validation->set_rules('kontributor', 'kontributor', 'required');
-                $this->form_validation->set_rules('status_publikasi', 'status_publikasi', 'required');
-                $this->form_validation->set_rules('fokus_berita_id', 'fokus_berita_id', 'required');
+                $this->form_validation->set_rules('status_publikasi', 'Status', 'required');
+                $this->form_validation->set_rules('fokus_berita_id', 'Fokus Berita', 'required');
                 $this->form_validation->set_rules('tags_id', 'tags_id', 'required');
                 $this->form_validation->set_rules('deskripsi', 'deskripsi', 'required');
-                // $this->form_validation->set_rules('komentar_reaksi', 'komentar_reaksi', 'required');
+                $this->form_validation->set_rules('content', 'content', 'required');
                 if ($this->form_validation->run() == true) {
                     $rand          = rand(00000000000000000000, 99999999999999999999);
                     $config_upload = array(
@@ -140,8 +139,8 @@ class Berita_api extends CI_Controller
                                     'fokus_berita_id' => $this->input->post('fokus_berita_id'),
                                     'tags_id' => $this->input->post('tags_id'),
                                     'gambar' => $this->upload->data('file_name'),
-                                    'deskripsi' => $this->input->post('deskripsi')
-                                    // 'komentar_reaksi' => $this->input->post('komentar_reaksi')
+                                    'deskripsi' => $this->input->post('deskripsi'),
+                                    'content' => $this->input->post('content')
                                 );
                                 $queryLogin = $this->crud_function_model->insertData('berita', $param);
                                 $message    = array(
@@ -166,7 +165,6 @@ class Berita_api extends CI_Controller
                 $response = array();
                 $this->form_validation->set_rules('uniq_berita', 'uniq_berita', 'required');
                 $this->form_validation->set_rules('user_id', 'user_id', 'required');
-                // $this->form_validation->set_rules('tgl', 'tgl', 'required');
                 $this->form_validation->set_rules('title', 'title', 'required');
                 $this->form_validation->set_rules('kategori_id', 'kategori_id', 'required');
                 $this->form_validation->set_rules('editor', 'editor', 'required');
@@ -175,16 +173,16 @@ class Berita_api extends CI_Controller
                 $this->form_validation->set_rules('fokus_berita_id', 'fokus_berita_id', 'required');
                 $this->form_validation->set_rules('tags_id', 'tags_id', 'required');
                 $this->form_validation->set_rules('deskripsi_edit', 'deskripsi', 'required');
+                $this->form_validation->set_rules('content', 'content', 'required');
                 // $this->form_validation->set_rules('komentar_reaksi', 'komentar_reaksi', 'required');
                 $this->form_validation->set_rules('user_id', 'user_id', 'required');
                 if ($this->form_validation->run() == true) {
                     if ($_FILES['gambar']['name'] == null || $_FILES['gambar']['name'] == '') {
-                        $where      = array(
+                        $where22      = array(
                             'uniq_berita' => $this->input->post('uniq_berita')
                         );
-                        $set        = array(
+                        $set22        = array(
                             'user_id' => $this->input->post('user_id'),
-                            // 'tgl' => $this->input->post('tgl'),
                             'title' => $this->input->post('title'),
                             'kategori_id' => $this->input->post('kategori_id'),
                             'editor' => $this->input->post('editor'),
@@ -193,14 +191,14 @@ class Berita_api extends CI_Controller
                             'fokus_berita_id' => $this->input->post('fokus_berita_id'),
                             'tags_id' => $this->input->post('tags_id'),
                             'deskripsi' => $this->input->post('deskripsi_edit'),
-                            // 'komentar_reaksi' => $this->input->post('komentar_reaksi')
+                            'content' => $this->input->post('content')
                         );
-                        $queryLogin = $this->crud_function_model->updateData('berita', $set, $where);
-                        $message    = array(
-                            'status' => '1',
-                            'message' => 'input berhasil'
-                        );
-                        array_push($response, $message);
+                        $this->crud_function_model->updateData('berita', $set22, $where22);
+                        // $message    = array(
+                        //     'status' => '1',
+                        //     'message' => 'update berhasil'
+                        // );
+                        // array_push($response, $message);
                     } else {
                         $rand          = rand(00000000000000000000, 99999999999999999999);
                         $config_upload = array(
@@ -279,12 +277,13 @@ class Berita_api extends CI_Controller
                                         'tags_id' => $this->input->post('tags_id'),
                                         'gambar' => $this->upload->data('file_name'),
                                         'deskripsi' => $this->input->post('deskripsi_edit'),
+                                        'content' => $this->input->post('content'),
                                         // 'komentar_reaksi' => $this->input->post('komentar_reaksi')
                                     );
                                     $where      = array(
                                         'uniq_berita' => $this->input->post('uniq_berita')
                                     );
-                                    $queryLogin = $this->crud_function_model->updateData('berita', $set, $where);
+                                    $this->crud_function_model->updateData('berita', $set, $where);
                                     $message = array(
                                         'status' => '1',
                                         'status_watermark' => '1',
@@ -323,4 +322,13 @@ class Berita_api extends CI_Controller
             }
         }
     }
+    // function select_valdation($string){
+    //     if($string == '' | $string == null){
+    //         $this->form_validation->set_message('select_valdation', 'Please Select Your City.');
+    //         return false;
+    //     } else {
+    //         $this->form_validation->set_message('select_valdation', 'Please Select Your City.');
+    //         return true;
+    //     }
+    // }
 }

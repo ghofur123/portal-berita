@@ -31,7 +31,7 @@ class user_api extends CI_Controller
                     );
                 }
                 $response      = array();
-                $queryDataRead = $this->crud_function_model->readData('user', '', $whereParam, 'id_user desc', '');
+                $queryDataRead = $this->crud_function_model->selectJoinTwoTable('*', 'user a', 'status_user b', 'a.`level` = b.uniq_status_user', '', $whereParam, 'a.nama_user asc');
                 foreach ($queryDataRead as $item) {
                     $user = array(
                         'id_user' => $item['id_user'],
@@ -39,7 +39,8 @@ class user_api extends CI_Controller
                         'nama_user' => $item['nama_user'],
                         'username' => $item['username'],
                         'password' => $item['password'],
-                        'level' => $item['level']
+                        'level' => $item['level'],
+                        'nama_status' => $item['nama_status']
                     );
                     array_push($response, $user);
                 }

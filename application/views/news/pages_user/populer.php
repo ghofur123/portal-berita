@@ -10,7 +10,7 @@
               <div class="col-lg-6  mb-5 mb-sm-2">
                 <div class="position-relative image-hover">
                   <img
-                    src="<?php base_url(); ?>../assets/usr/images/dashboard/glob.jpg"
+                    src="<?php base_url(); ?>./assets/usr/images/dashboard/glob.jpg"
                     class="img-fluid"
                     alt="world-news"
                   />
@@ -30,7 +30,7 @@
                   <div class="col-sm-6  mb-5 mb-sm-2">
                     <div class="position-relative image-hover">
                       <img
-                        src="<?php base_url(); ?>../assets/usr/images/dashboard/star-magazine-5.jpg"
+                        src="<?php base_url(); ?>./assets/usr/images/dashboard/star-magazine-5.jpg"
                         class="img-fluid"
                         alt="world-news"
                       />
@@ -46,7 +46,7 @@
                   <div class="col-sm-6  mb-5 mb-sm-2">
                     <div class="position-relative image-hover">
                       <img
-                        src="<?php base_url(); ?>../assets/usr/images/dashboard/star-magazine-6.jpg"
+                        src="<?php base_url(); ?>./assets/usr/images/dashboard/star-magazine-6.jpg"
                         class="img-fluid"
                         alt="world-news"
                       />
@@ -64,7 +64,7 @@
                   <div class="col-sm-6  mb-5 mb-sm-2">
                     <div class="position-relative image-hover">
                       <img
-                        src="<?php base_url(); ?>../assets/usr/images/dashboard/star-magazine-7.jpg"
+                        src="<?php base_url(); ?>./assets/usr/images/dashboard/star-magazine-7.jpg"
                         class="img-fluid"
                         alt="world-news"
                       />
@@ -80,7 +80,7 @@
                   <div class="col-sm-6">
                     <div class="position-relative image-hover">
                       <img
-                        src="<?php base_url(); ?>../assets/usr/images/dashboard/star-magazine-8.jpg"
+                        src="<?php base_url(); ?>./assets/usr/images/dashboard/star-magazine-8.jpg"
                         class="img-fluid"
                         alt="world-news"
                       />

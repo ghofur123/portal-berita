@@ -12,7 +12,7 @@
                   <div class="col-sm-4  mb-5 mb-sm-2">
                     <div class="position-relative image-hover">
                       <img
-                        src="<?php base_url(); ?>../assets/usr/images/dashboard/star-magazine-9.jpg"
+                        src="<?php base_url(); ?>./assets/usr/images/dashboard/star-magazine-9.jpg"
                         class="img-fluid"
                         alt="world-news"
                       />
@@ -25,7 +25,7 @@
                   <div class="col-sm-4 mb-5 mb-sm-2">
                     <div class="position-relative image-hover">
                       <img
-                        src="<?php base_url(); ?>../assets/usr/images/dashboard/star-magazine-10.jpg"
+                        src="<?php base_url(); ?>./assets/usr/images/dashboard/star-magazine-10.jpg"
                         class="img-fluid"
                         alt="world-news"
                       />
@@ -38,7 +38,7 @@
                   <div class="col-sm-4 mb-5 mb-sm-2">
                     <div class="position-relative image-hover">
                       <img
-                        src="<?php base_url(); ?>../assets/usr/images/dashboard/star-magazine-11.jpg"
+                        src="<?php base_url(); ?>./assets/usr/images/dashboard/star-magazine-11.jpg"
                         class="img-fluid"
                         alt="world-news"
                       />
@@ -53,7 +53,7 @@
                   <div class="col-sm-4 mb-5 mb-sm-2">
                     <div class="position-relative image-hover">
                       <img
-                        src="<?php base_url(); ?>../assets/usr/images/dashboard/star-magazine-12.jpg"
+                        src="<?php base_url(); ?>./assets/usr/images/dashboard/star-magazine-12.jpg"
                         class="img-fluid"
                         alt="world-news"
                       />
@@ -66,7 +66,7 @@
                   <div class="col-sm-4 mb-5 mb-sm-2">
                     <div class="position-relative image-hover">
                       <img
-                        src="<?php base_url(); ?>../assets/usr/images/dashboard/star-magazine-13.jpg"
+                        src="<?php base_url(); ?>./assets/usr/images/dashboard/star-magazine-13.jpg"
                         class="img-fluid"
                         alt="world-news"
                       />
@@ -79,7 +79,7 @@
                   <div class="col-sm-4 mb-5 mb-sm-2">
                     <div class="position-relative image-hover">
                       <img
-                        src="<?php base_url(); ?>../assets/usr/images/dashboard/star-magazine-14.jpg"
+                        src="<?php base_url(); ?>./assets/usr/images/dashboard/star-magazine-14.jpg"
                         class="img-fluid"
                         alt="world-news"
                       />
@@ -94,7 +94,7 @@
               <div class="col-lg-3">
                 <div class="position-relative mb-3">
                   <img
-                    src="<?php base_url(); ?>../assets/usr/images/dashboard/star-magazine-15.jpg"
+                    src="<?php base_url(); ?>./assets/usr/images/dashboard/star-magazine-15.jpg"
                     class="img-fluid"
                     alt="world-news"
                   />

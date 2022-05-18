@@ -9,7 +9,7 @@
                 </ul>
                 <div>
                   <a class="navbar-brand" href="#"
-                    ><img src="<?php base_url(); ?>../assets/usr/images/logo.svg" alt=""
+                    ><img src="<?php base_url(); ?>./assets/usr/images/logo.svg" alt=""
                   /></a>
                 </div>
                 <div class="d-flex">

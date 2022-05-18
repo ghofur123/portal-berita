@@ -44,7 +44,9 @@ class menu_api extends CI_Controller
                         'uniq_menu' => $item['uniq_menu'],
                         'nama_menu' => $item['nama_menu'],
                         'status' => $item['status'],
-                        'link' => $item['link']
+                        'link' => $item['link'],
+                        'status_aktif' => $item['status_aktif']
+
                     );
                 }
                 if(!isset($menu)){
@@ -69,17 +71,6 @@ class menu_api extends CI_Controller
                     }
                     
                 }
-                // if(!isset($menu_utama)){
-                //     $response = array(
-                //         'data' => ''
-                //     );
-                // } else {
-                //     $response = array(
-                //         'jumlah' => count($queryDataRead),
-                //         'menu_utama' => $menu_utama,
-                //         'menu_sub' => $menu_sub
-                //     );
-                // }
                 $response = array(
                     'jumlah' => count($queryDataRead),
                     'menu_utama' => $menu_utama,
@@ -156,12 +147,13 @@ class menu_api extends CI_Controller
                     'nama_menu' => $this->input->post('nama_menu'),
                     'status' => $this->input->post('status'),
                     'menu_utama_id' => $this->input->post('menu_utama_id'),
-                    'link' => $this->input->post('link')
+                    'link' => $this->input->post('link'),
+                    'status_aktif' => $this->input->post('status_aktif')
                 );
                 $this->form_validation->set_rules('nama_menu', 'nama_menu', 'required');
                 $this->form_validation->set_rules('status', 'status', 'required');
-                // $this->form_validation->set_rules('menu_utama_id', 'menu_utama_id', 'required');
                 $this->form_validation->set_rules('link', 'link', 'required');
+                $this->form_validation->set_rules('status_aktif', 'status_aktif', 'required');
                 if ($this->form_validation->run() == true) {
                     $queryLogin = $this->crud_function_model->insertData('menu', $param);
                     $message    = array(
@@ -186,12 +178,13 @@ class menu_api extends CI_Controller
                     'nama_menu' => $this->input->post('nama_menu'),
                     'status' => $this->input->post('status'),
                     'menu_utama_id' => $this->input->post('menu_utama_id'),
-                    'link' => $this->input->post('link')
+                    'link' => $this->input->post('link'),
+                    'status_aktif' => $this->input->post('status_aktif')
                 );
                 $this->form_validation->set_rules('nama_menu', 'nama_menu', 'required');
                 $this->form_validation->set_rules('status', 'status', 'required');
-                // $this->form_validation->set_rules('menu_utama_id', 'Menu Utama', 'required');
                 $this->form_validation->set_rules('link', 'link', 'required');
+                $this->form_validation->set_rules('status_aktif', 'status_aktif', 'required');
                 if ($this->form_validation->run() == true) {
                     $queryLogin = $this->crud_function_model->updateData('menu', $set, $where);
                     $message    = array(

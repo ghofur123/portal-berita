@@ -23,6 +23,7 @@ $(document).on('click', '.btn-close-class', function(){
     btnact();
 });
 function pagesLoadDataAll() {
+    $('.exampledttbl').hide();
     let pagesDataResult = '';
     $.ajax({
         type: 'POST',
@@ -42,14 +43,13 @@ function pagesLoadDataAll() {
                     "</div>"+
                     "<div class='panel-body'>"+
                         "<div class='table-responsive'>"+
-                            "<table class='table table-hover table-data-class'>"+
+                            "<table class='exampledttbl table table-hover table-data-class'>"+
                                 "<thead>"+
                                     "<tr>"+
                                         "<th>#</th>"+
                                         "<th>Title</th>"+
                                         "<th>Link</th>"+
                                         "<th>Status</th>"+
-                                        // "<th>Deskripsi</th>"+
                                         "<th>act</th>"+
                                     "</tr>"+
                                 "</thead>"+
@@ -61,7 +61,6 @@ function pagesLoadDataAll() {
                                 "<td>"+ data[i]['judul'] +"</td>"+
                                 "<td>"+ data[i]['link_pages'] +"</td>"+
                                 "<td>"+ data[i]['status'] +"</td>"+
-                                // "<td>"+ data[i]['deskripsi'] +"</td>"+
                                 "<td><button type='button' data='" + data[i]['uniq_pages'] + "' class='btn-pages-form-edit btn btn-primary btn-edit-global'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></button>"+
                                 "<button type='button' data='" + data[i]['uniq_pages'] + "' class='btn-pages-form-delete btn btn-danger btn-delete-global'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></td>";
                             }
@@ -72,11 +71,15 @@ function pagesLoadDataAll() {
                         "</div>"+
                     "</div>"+
                 "</div>";
-            $('.class-pages-view-data').html(pagesDataResult);
+            setTimeout(function(){
+                $('.class-pages-view-data').html(pagesDataResult);
+                $('.exampledttbl').DataTable();
+                $('.progress').hide();
+                $('.exampledttbl').show();
+            }, 500);
             btnact();
         }
     }).done(function() {
-        $('.progress').hide();
     });
 }
 $(document).on('click', '.btn-pages-form-edit', function() {
@@ -110,10 +113,7 @@ $(document).on('click', '.btn-pages-form-edit', function() {
                     statusValue +="<option value='aktif'>aktif</option>"+
                     "<option selected value='tidak aktif'>tidak aktif</option>";
                 }
-                
             $('.status-value-edit').html(statusValue);
-            // $('.deskripsi_edit').val(data[0]['deskripsi']);
-            // editor2.setData(data[0]['deskripsi']);
             CKEDITOR.instances['deskripsi_edit'].setData(data[0]['deskripsi']);
         }
     }).done(function() {
@@ -121,28 +121,30 @@ $(document).on('click', '.btn-pages-form-edit', function() {
     });
 });
 $(document).on('click', '.btn-pages-form-delete', function() {
-    let dataId = $(this).attr('data');
-    let pagesDeleteDataResult = '';
-    $.ajax({
-        type: 'POST',
-        url: 'pages_api/load?act=delete&uniq_pages=' + dataId,
-        contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-        dataType: 'json',
-        data: '',
-        beforeSend: function() {
-            $('.progress').show();
-        },
-        success: function(data) {
-            if (data[0]['status'] == 1) {
-                console.log(data[0]['message']);
-                pagesLoadDataAll();
-            } else if (data[0]['status'] == 2) {
-                console.log(data[0]['message']);
+    if(confirm('akan di hapus permanen')){
+        let dataId = $(this).attr('data');
+        let pagesDeleteDataResult = '';
+        $.ajax({
+            type: 'POST',
+            url: 'pages_api/load?act=delete&uniq_pages=' + dataId,
+            contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+            dataType: 'json',
+            data: '',
+            beforeSend: function() {
+                $('.progress').show();
+            },
+            success: function(data) {
+                if (data[0]['status'] == 1) {
+                    console.log(data[0]['message']);
+                    pagesLoadDataAll();
+                } else if (data[0]['status'] == 2) {
+                    console.log(data[0]['message']);
+                }
             }
-        }
-    }).done(function() {
-        $('.progress').hide();
-    });
+        }).done(function() {
+            $('.progress').hide();
+        });
+    }
 });
 $(document).on('submit', '.form-edit-pages-1649454613157', function() {
     $.ajax({

@@ -43,6 +43,7 @@ $(document).on('click', '.btn-close-class', function(){
     btnact();
 });
 function userLoadDataAll() {
+    $('.exampledttbl').hide();
     let userDataResult = '';
     $.ajax({
         type: 'POST',
@@ -62,13 +63,12 @@ function userLoadDataAll() {
                     "</div>"+
                     "<div class='panel-body'>"+
                         "<div class='table-responsive'>"+
-                            "<table class='table table-hover'>"+
+                            "<table class='exampledttbl table table-hover'>"+
                                 "<thead>"+
                                     "<tr>"+
                                         "<th>#</th>"+
                                         "<th>Nama</th>"+
                                         "<th>Username</th>"+
-                                        "<th>Password</th>"+
                                         "<th>Level</th>"+
                                         "<th>act</th>"+
                                     "</tr>"+
@@ -80,10 +80,9 @@ function userLoadDataAll() {
                                     "<td>"+numberRows+++"</td>"+
                                     "<td>"+data[i]['nama_user']+"</td>"+
                                     "<td>"+data[i]['username']+"</td>"+
-                                    "<td>********</td>"+
-                                    "<td>"+data[i]['level']+"</td>"+
+                                    "<td>"+data[i]['nama_status']+"</td>"+
                                     "<td><button type='button' data='" + data[i]['uniq_user'] + "' class='btn-user-form-edit btn btn-primary btn-edit-global'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></button>"+
-                                    "<button type='button' data='" + data[i]['uniq_user'] + "' class='btn-user-form-menu-access btn btn-success btn-edit-global'>access</button>"+
+                                    "<button type='button' data='" + data[i]['uniq_user'] + "' class='btn-user-form-menu-access btn btn-success btn-edit-global'><span class='glyphicon glyphicon-stats' aria-hidden='true'></span></button>"+
                                     "<button type='button' data='" + data[i]['uniq_user'] + "' class='btn-user-form-delete btn btn-danger btn-delete-global'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></td>"+
                                     "</tr>";
                                 }
@@ -94,11 +93,16 @@ function userLoadDataAll() {
                         "</div>"+
                     "</div>"+
                 "</div>";
-            $('.class-user-view-data').html(userDataResult);
+            setTimeout(function(){
+                $('.class-user-view-data').html(userDataResult);
+                $('.exampledttbl').DataTable();
+                $('.progress').hide();
+                $('.exampledttbl').show();
+            }, 500);
             btnact();
         }
     }).done(function() {
-        $('.progress').hide();
+        // $('.progress').hide();
     });
 }
 $(document).on('click', '.btn-user-form-edit', function() {
@@ -148,28 +152,29 @@ $(document).on('click', '.btn-user-form-edit', function() {
     });
 });
 $(document).on('click', '.btn-user-form-delete', function() {
-    let dataId = $(this).attr('data');
-    let userDeleteDataResult = '';
-    $.ajax({
-        type: 'POST',
-        url: 'user_api/load?act=delete&uniq_user=' + dataId,
-        contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-        dataType: 'json',
-        data: '',
-        beforeSend: function() {
-            $('.progress').show();
-        },
-        success: function(data) {
-            if (data[0]['status'] == 1) {
-                console.log(data[0]['message']);
-                userLoadDataAll();
-            } else if (data[0]['status'] == 2) {
-                console.log(data[0]['message']);
+    if(confirm('akan di hapus permanen')){
+        let dataId = $(this).attr('data');
+        $.ajax({
+            type: 'POST',
+            url: 'user_api/load?act=delete&uniq_user=' + dataId,
+            contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+            dataType: 'json',
+            data: '',
+            beforeSend: function() {
+                $('.progress').show();
+            },
+            success: function(data) {
+                if (data[0]['status'] == 1) {
+                    console.log(data[0]['message']);
+                    userLoadDataAll();
+                } else if (data[0]['status'] == 2) {
+                    console.log(data[0]['message']);
+                }
             }
-        }
-    }).done(function() {
-        $('.progress').hide();
-    });
+        }).done(function() {
+            $('.progress').hide();
+        });
+    }
 });
 $(document).on('submit', '.form-edit-user-1649240366439', function() {
     $.ajax({

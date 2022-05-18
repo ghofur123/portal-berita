@@ -5,6 +5,8 @@
     margin-right: 100px;
 }
 .progress {
+    z-index: 4;
+    /* position: absolute; */
     display: none;
 }
 .check-box-class {

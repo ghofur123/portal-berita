@@ -39,6 +39,7 @@ $(document).on('click', '.btn-close-class', function(){
     btnact();
 });
 function fokus_beritaLoadDataAll() {
+    $('.exampledttbl').hide();
     let fokus_beritaDataResult = '';
     $.ajax({
         type: 'POST',
@@ -58,7 +59,7 @@ function fokus_beritaLoadDataAll() {
                     "</div>"+
                     "<div class='panel-body'>"+
                         "<div class='table-responsive'>"+
-                            "<table class='table table-hover'>"+
+                            "<table class='exampledttbl table table-hover'>"+
                                 "<thead>"+
                                     "<tr>"+
                                         "<th>#</th>"+
@@ -86,11 +87,16 @@ function fokus_beritaLoadDataAll() {
                         "</div>"+
                     "</div>"+
                 "</div>";
-            $('.class-fokus_berita-view-data').html(fokus_beritaDataResult);
+            
+            setTimeout(function(){
+                $('.class-fokus_berita-view-data').html(fokus_beritaDataResult);
+                $('.exampledttbl').DataTable();
+                $('.progress').hide();
+                $('.exampledttbl').show();
+            }, 500);
             btnact();
         }
     }).done(function() {
-        $('.progress').hide();
     });
 }
 
@@ -145,28 +151,30 @@ $(document).on('click', '.btn-fokus_berita-form-edit', function() {
     });
 });
 $(document).on('click', '.btn-fokus_berita-form-delete', function() {
-    let dataId = $(this).attr('data');
-    let fokus_beritaDeleteDataResult = '';
-    $.ajax({
-        type: 'POST',
-        url: 'fokus_berita_api/load?act=delete&uniq_fokus_berita=' + dataId,
-        contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-        dataType: 'json',
-        data: '',
-        beforeSend: function() {
-            $('.progress').show();
-        },
-        success: function(data) {
-            if (data[0]['status'] == 1) {
-                console.log(data[0]['message']);
-                fokus_beritaLoadDataAll();
-            } else if (data[0]['status'] == 2) {
-                console.log(data[0]['message']);
+    if(confirm('akan di hapus permanen')){
+        let dataId = $(this).attr('data');
+        $.ajax({
+            type: 'POST',
+            url: 'fokus_berita_api/load?act=delete&uniq_fokus_berita=' + dataId,
+            contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+            dataType: 'json',
+            data: '',
+            beforeSend: function() {
+                $('.progress').show();
+            },
+            success: function(data) {
+                if (data[0]['status'] == 1) {
+                    console.log(data[0]['message']);
+                    fokus_beritaLoadDataAll();
+                } else if (data[0]['status'] == 2) {
+                    console.log(data[0]['message']);
+                }
             }
-        }
-    }).done(function() {
-        $('.progress').hide();
-    });
+        }).done(function() {
+            $('.progress').hide();
+        });
+    }
+    
 });
 $(document).on('submit', '.form-edit-fokus_berita-1649635095021', function() {
     $.ajax({

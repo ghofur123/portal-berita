@@ -20,7 +20,7 @@ $('.btn-new-data').click(function(){
         selectFormInput('user_api/load?act=load_user_status&where_parameter=kontributor', 'kontributor', 'uniq_user', 'nama_user', '.kontributor-class-view');
         selectFormInput('fokus_berita_api/load?act=load', 'fokus_berita_id', 'uniq_fokus_berita', 'nama_fokus_berita', '.fokus-berita-class-view');
 
-    }, 1000);
+    }, 500);
 });
 $(document).on('click', '.btn-close-class', function(){
     $('.btn-new-data').show();
@@ -31,6 +31,7 @@ $(document).on('click', '.btn-close-class', function(){
     btnact();
 });
 function beritaLoadDataAll() {
+    $('.exampledttbl').hide();
     let beritaDataResult = '';
     $.ajax({
         type: 'POST',
@@ -43,24 +44,49 @@ function beritaLoadDataAll() {
         },
         success: function(data) {
             let numberRows = 1;
+            beritaDataResult += ""+
+            "<table class='exampledttbl table table-hover table-data-class'>"+
+                "<thead>"+
+                    "<tr>"+
+                        "<th>#</th>"+
+                        "<th>Kontributor</th>"+
+                        "<th>Editor</th>"+
+                        "<th>Tgl</th>"+
+                        "<th>Title</th>"+
+                        "<th>Kategori</th>"+
+                        "<th>Status</th>"+
+                        "<th>Content</th>"+
+                        "<th>act</th>"+
+                    "</tr>"+
+                "</thead>"+
+                "<tbody>";
             for (var i = 0; i < data.length; i++) {
-                beritaDataResult += "<tr>"+
-                "<td>"+ numberRows++ +"</td>"+
-                "<td>"+ data[i]['kontributor_nm'] +"</td>"+
-                "<td>"+ data[i]['editor_nm'] +"</td>"+
-                "<td>"+ data[i]['tgl'] +"</td>"+
-                "<td>"+ data[i]['title'] +"</td>"+
-                "<td>"+ data[i]['title_kategori'] +"</td>"+
-                "<td>"+ data[i]['status_publikasi'] +"</td>"+
-                "<td><button type='button' data='" + data[i]['uniq_berita'] + "' class='btn-berita-form-edit btn btn-primary'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>"+
-                "<button type='button' data='" + data[i]['uniq_berita'] + "' class='btn-berita-form-delete btn btn-danger'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></td>";
+                beritaDataResult += ""+
+                "<tr>"+
+                    "<td>"+ numberRows++ +"</td>"+
+                    "<td>"+ data[i]['kontributor_nm'] +"</td>"+
+                    "<td>"+ data[i]['editor_nm'] +"</td>"+
+                    "<td>"+ data[i]['tgl'] +"</td>"+
+                    "<td>"+ data[i]['title'] +"</td>"+
+                    "<td>"+ data[i]['title_kategori'] +"</td>"+
+                    "<td>"+ data[i]['status_publikasi'] +"</td>"+
+                    "<td>"+ data[i]['content'] +"</td>"+
+                    "<td><button type='button' data='" + data[i]['uniq_berita'] + "' class='btn-berita-form-edit btn btn-primary'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>"+
+                    "<button type='button' data='" + data[i]['uniq_berita'] + "' class='btn-berita-form-delete btn btn-danger'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></td>"+
+                "</tr>";
             }
-
-            $('.class-berita-view-data').html(beritaDataResult);
+            beritaDataResult += ""+
+                "</tbody>"+
+            "</table>";
+            setTimeout(function(){
+                $('.class-berita-view-data').html(beritaDataResult);
+                $('.exampledttbl').DataTable();
+                $('.progress').hide();
+                $('.exampledttbl').show();
+            }, 500);
             btnact();
         }
     }).done(function() {
-        $('.progress').hide();
     });
 }
 $('.form-berita-1649650076706').submit(function() {
@@ -89,6 +115,9 @@ $('.form-berita-1649650076706').submit(function() {
 
     let tags_idText = $('input[name=tags_id]').val();
     formData.append('tags_id', tags_idText);
+
+    let contentText = $('select[name=content]').val();
+    formData.append('content', contentText);
 
     let gambarFile = $('input[name=gambar]');
     let gambarFileToUpload = gambarFile[0].files[0];
@@ -124,7 +153,7 @@ $('.form-berita-1649650076706').submit(function() {
                 $('.class-form-input-card1').hide();
                 $('.class-form-input-card2').hide();
                 btnact();
-                setTimeout(function () {beritaLoadDataAll();},1000);
+                beritaLoadDataAll();
             }
         }
     }).done(function() {
@@ -142,6 +171,7 @@ $(document).on('click', '.btn-berita-form-edit', function() {
     $('.class-form-input-card2').show();
 
     let dataId = $(this).attr('data');
+    console.log(dataId);
     let beritaEditDataResult = '';
     $.ajax({
         type: 'POST',
@@ -161,28 +191,66 @@ $(document).on('click', '.btn-berita-form-edit', function() {
                 fisledglo('user_api/load?act=load_user_status&where_parameter=editor', 'editor_edit', 'uniq_user', 'nama_user', '.editor-class-view-edit', data[0]['editor']);
                 fisledglo('user_api/load?act=load_user_status&where_parameter=kontributor', 'kontributor_edit', 'uniq_user', 'nama_user', '.kontributor-class-view-edit', data[0]['kontributor']);
                 let status_publis = "";
-                status_publis += "<select name='status_publikasi_edit' class='form-control'>"+
+                status_publis += "<select  name='status_publikasi_edit' class='form-control'>"+
                     "<option value=''>Pilih Status</option>";
                 if(data[0]['status_publikasi'] == 'aktif'){
-                    status_publis += "<option selected value='aktif'>aktif</option>";
-                    status_publis += "<option value='pending'>pending</option>";
-                    status_publis += "<option value='non aktif'>non aktif</option>";
+                    status_publis += "<option selected value='aktif'>aktif</option>"+
+                    "<option value='pending'>pending</option>"+
+                    "<option value='non aktif'>non aktif</option>";
                 } else if(data[0]['status_publikasi'] == 'pending'){
-                    status_publis += "<option value='aktif'>aktif</option>";
-                    status_publis += "<option selected value='pending'>pending</option>";
-                    status_publis += "<option value='non aktif'>non aktif</option>";
+                    status_publis += "<option value='aktif'>aktif</option>"+
+                    "<option selected value='pending'>pending</option>"+
+                    "<option value='non aktif'>non aktif</option>";
                 } else if(data[0]['status_publikasi'] == 'non aktif'){
-                    status_publis += "<option value='aktif'>aktif</option>";
-                    status_publis += "<option value='pending'>pending</option>";
-                    status_publis += "<option selected value='non aktif'>non aktif</option>";
+                    status_publis += "<option value='aktif'>aktif</option>"+
+                    "<option value='pending'>pending</option>"+
+                    "<option selected value='non aktif'>non aktif</option>";
                 } else {
-                    status_publis += "<option value='aktif'>aktif</option>";
-                    status_publis += "<option value='pending'>pending</option>";
-                    status_publis += "<option value='non aktif'>non aktif</option>";
+                    status_publis += "<option value='aktif'>aktif</option>"+
+                    "<option value='pending'>pending</option>"+
+                    "<option value='non aktif'>non aktif</option>";
                 }
                 $('.status-publikasi-class').html(status_publis);
                 fisledglo('fokus_berita_api/load?act=load', 'fokus_berita_id_edit', 'uniq_fokus_berita', 'nama_fokus_berita', '.fokus-berita-class-view-edit', data[0]['fokus_berita_id']);
                 $('.tags_id_edit').val(data[0]['tags_id']);
+                contentDt = "";
+                if(data[0]['content'] == 'top'){
+                    contentDt += "<option value='0'>Pilih Content</option>"+
+                            "<option selected value='top'>top</option>"+
+                            "<option value='slider'>slider</option>"+
+                            "<option value='side'>side</option>"+
+                            "<option value='populer'>populer</option>"+
+                            "<option value='0'>none</option>";
+                } else if(data[0]['content'] == 'slider'){
+                    contentDt += "<option value='0'>Pilih Content</option>"+
+                            "<option  value='top'>top</option>"+
+                            "<option selected value='slider'>slider</option>"+
+                            "<option value='side'>side</option>"+
+                            "<option value='populer'>populer</option>"+
+                            "<option value='0'>none</option>";
+                } else if(data[0]['content'] == 'side'){
+                    contentDt += "<option value='0'>Pilih Content</option>"+
+                            "<option  value='top'>top</option>"+
+                            "<option  value='slider'>slider</option>"+
+                            "<option selected value='side'>side</option>"+
+                            "<option value='populer'>populer</option>"+
+                            "<option value='0'>none</option>";
+                } else if(data[0]['content'] == 'populer'){
+                    contentDt += "<option value='0'>Pilih Content</option>"+
+                            "<option  value='top'>top</option>"+
+                            "<option  value='slider'>slider</option>"+
+                            "<option  value='side'>side</option>"+
+                            "<option selected value='populer'>populer</option>"+
+                            "<option value='0'>none</option>";
+                } else {
+                    contentDt += "<option value='0'>Pilih Content</option>"+
+                            "<option  value='top'>top</option>"+
+                            "<option  value='slider'>slider</option>"+
+                            "<option  value='side'>side</option>"+
+                            "<option  value='populer'>populer</option>"+
+                            "<option selected value='0'>none</option>";
+                }
+                $('.content_edit').html(contentDt);
                 $('.class-images-view').html("<img src='../uploads/up/"+ data[0]['gambar'] +"' width='150px' height='150px'/>");
                 CKEDITOR.instances.deskripsi_edit.setData(data[0]['deskripsi']);
             }, 1000);
@@ -192,26 +260,27 @@ $(document).on('click', '.btn-berita-form-edit', function() {
     });
 });
 $(document).on('click', '.btn-berita-form-delete', function() {
-    let dataId = $(this).attr('data');
-    let beritaDeleteDataResult = '';
-    $.ajax({
-        type: 'POST',
-        url: 'berita_api/load?act=delete&uniq_berita=' + dataId,
-        contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-        dataType: 'json',
-        data: '',
-        beforeSend: function() {
-            $('.progress').show();
-        },
-        success: function(data) {
-            if (data[0]['status'] == 1) {
-                beritaLoadDataAll();
-            } else if (data[0]['status'] == 2) {
+    if(confirm('akan di hapus permanen')){
+        let dataId = $(this).attr('data');
+        $.ajax({
+            type: 'POST',
+            url: 'berita_api/load?act=delete&uniq_berita=' + dataId,
+            contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+            dataType: 'json',
+            data: '',
+            beforeSend: function() {
+                $('.progress').show();
+            },
+            success: function(data) {
+                if (data[0]['status'] == 1) {
+                    beritaLoadDataAll();
+                } else if (data[0]['status'] == 2) {
+                }
             }
-        }
-    }).done(function() {
-        $('.progress').hide();
-    });
+        }).done(function() {
+        });
+    }
+    
 });
 $(document).on('submit', '.form-edit-berita-1649650076706', function() {
     var formData = new FormData();
@@ -246,16 +315,24 @@ $(document).on('submit', '.form-edit-berita-1649650076706', function() {
     let tags_idText = $('input[name=tags_id_edit]').val();
     formData.append('tags_id', tags_idText);
 
+    let contentText = $('select[name=content_edit]').val();
+    formData.append('content', contentText);
+
+
     let gambarFile = $('input[name=gambar_edit]');
     let gambarFileToUpload = gambarFile[0].files[0];
     formData.append('gambar', gambarFileToUpload);
+    if(gambarFileToUpload == null){
+        var dataType = 'html';
+    } else {
+        var dataType = 'json';
+    }
 
-    // let deskripsiText = $('input[name=deskripsi_edit]').val();
     let deskripsiText = CKEDITOR.instances.deskripsi_edit.getData();
     formData.append('deskripsi_edit', deskripsiText);
 
-    let komentar_reaksiText = $('input[name=komentar_reaksi_edit]').val();
-    formData.append('komentar_reaksi', komentar_reaksiText);
+    // let komentar_reaksiText = $('input[name=komentar_reaksi_edit]').val();
+    // formData.append('komentar_reaksi', komentar_reaksiText);
 
     $.ajax({
         type: 'POST',
@@ -264,17 +341,18 @@ $(document).on('submit', '.form-edit-berita-1649650076706', function() {
         processData: false,
         contentType: false,
         cache: false,
-        dataType: 'json',
+        dataType: dataType,
         beforeSend: function() {
             $('.progress').show();
         },
         success: function(data) {
+            // console.log(data);
             if(Boolean(data[0]['status'])){
                 if(data[0]['status'] == 2){
                     $('.alert-information').show();
                     $('.message-pages').html(data[0]['message']);
                     setTimeout(function(){$('.alert-information').hide();},2000);
-                } 
+                }
             }else {
                 $('.btn-new-data').show();
                 $('.form-input-class-all').hide();
@@ -282,7 +360,8 @@ $(document).on('submit', '.form-edit-berita-1649650076706', function() {
                 $('.class-form-input-card1').hide();
                 $('.class-form-input-card2').hide();
                 btnact();
-                setTimeout(function () {beritaLoadDataAll();},1000);
+                setTimeout(function () {beritaLoadDataAll();},500);
+                
             }
         }
     }).done(function() {
@@ -302,7 +381,7 @@ function selectFormInput(link, nameForm, valueName, viewName, divValueDataGlo){
         data: '',
         beforeSend: function() {},
         success: function(data) {
-            dataValueGlobalFunction += "<select name='"+ nameForm +"' id='id-"+ nameForm +"-select' class='class-"+ nameForm +"-select form-control'>";
+            dataValueGlobalFunction += "<select  name='"+ nameForm +"' id='id-"+ nameForm +"-select' class='class-"+ nameForm +"-select form-control'>";
             dataValueGlobalFunction += "<option value='#'>-Pilih "+ nameForm +"-</option>";
             for (var i = 0; i < data.length; i++) {
                 dataValueGlobalFunction += "<option value='"+ data[i][valueName] +"'>"+ data[i][viewName] +"</option>";
@@ -322,10 +401,9 @@ function fisledglo(link, nameForm, valueName, viewName, divValueDataGlo, selecte
         data: '',
         beforeSend: function() {},
         success: function(data) {
-            dataValueGlobalFunction += "<select name='"+ nameForm +"' id='id-"+ nameForm +"-select' class='class-"+ nameForm +"-select form-control'>";
+            dataValueGlobalFunction += "<select  name='"+ nameForm +"' id='id-"+ nameForm +"-select' class='class-"+ nameForm +"-select form-control'>";
             dataValueGlobalFunction += "<option value='#'>-Pilih "+ nameForm +"-</option>";
             for (var i = 0; i < data.length; i++) {
-                console.log(data[i][valueName] +"-----"+selectedDataGlo);
                 if(data[i][valueName] == selectedDataGlo){
                     dataValueGlobalFunction += "<option selected value='"+ data[i][valueName] +"'>"+ data[i][viewName] +"</option>";
                 } else {

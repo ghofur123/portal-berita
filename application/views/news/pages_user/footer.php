@@ -56,7 +56,7 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="d-flex justify-content-between">
-                  <img src="<?php base_url(); ?>../assets/usr/images/logo.svg" class="footer-logo" alt="" />
+                  <img src="<?php base_url(); ?>./assets/usr/images/logo.svg" class="footer-logo" alt="" />
 
                   <div class="d-flex justify-content-end footer-social">
                     <h5 class="m-0 font-weight-600 mr-3 d-none d-lg-flex">Follow on</h5>
@@ -120,14 +120,14 @@
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <!-- inject:js -->
-    <script src="<?php base_url(); ?>../assets/usr/vendors/js/vendor.bundle.base.js"></script>
+    <script src="<?php base_url(); ?>./assets/usr/vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- plugin js for this page -->
-    <script src="<?php base_url(); ?>../assets/usr/vendors/owl.carousel/dist/owl.carousel.min.js"></script>
+    <script src="<?php base_url(); ?>./assets/usr/vendors/owl.carousel/dist/owl.carousel.min.js"></script>
     <!-- End plugin js for this page -->
     <!-- Custom js for this page-->
-    <script src="<?php base_url(); ?>../assets/usr/js/demo.js"></script>
+    <script src="<?php base_url(); ?>./assets/usr/js/demo.js"></script>
     <!-- End custom js for this page-->
-    <script src="<?php base_url(); ?>../assets/usr/js/home.js"></script>
+    <script src="<?php base_url(); ?>./assets/usr/js/home.js"></script>
   </body>
 </html>

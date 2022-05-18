@@ -83,6 +83,37 @@ class Crud_function_model extends CI_Model {
 		$query = $this->db->get();
 		return $query->result_array();
 	}
+	public function selectJoinFiveTable($select, $table1, $table2, $on2, $left2, $table3, $on3, $left3,  $table4, $on4, $left4, $table5, $on5, $left5, $where, $orderBy){
+		$this->db->select($select);
+		$this->db->from($table1);
+		$this->db->join($table2, $on2, $left2);
+		$this->db->join($table3, $on3, $left3);
+		$this->db->join($table4, $on4, $left4);
+		$this->db->join($table5, $on5, $left5);
+		if(empty($where)){
+		} else {
+			$this->db->where($where);
+		}
+    	$this->db->order_by($orderBy);   
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+	public function selectJoinFiveTableLimit($select, $table1, $table2, $on2, $left2, $table3, $on3, $left3,  $table4, $on4, $left4, $table5, $on5, $left5, $where, $orderBy, $limit){
+		$this->db->select($select);
+		$this->db->from($table1);
+		$this->db->join($table2, $on2, $left2);
+		$this->db->join($table3, $on3, $left3);
+		$this->db->join($table4, $on4, $left4);
+		$this->db->join($table5, $on5, $left5);
+		if(empty($where)){
+		} else {
+			$this->db->where($where);
+		}
+    	$this->db->order_by($orderBy);   
+    	$this->db->limit($limit);   
+		$query = $this->db->get();
+		return $query->result_array();
+	}
 	public function deleteData($nameTable, $where){
 		//catatan
 		//untuk where harus di atas nameTable

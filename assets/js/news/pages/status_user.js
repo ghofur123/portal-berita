@@ -30,6 +30,7 @@ $(document).on('click', '.btn-close-class', function(){
     btnact();
 });
 function status_userLoadDataAll() {
+    $('.exampledttbl').hide();
     let status_userDataResult = '';
     $.ajax({
         type: 'POST',
@@ -49,13 +50,12 @@ function status_userLoadDataAll() {
                     "</div>"+
                     "<div class='panel-body'>"+
                         "<div class='table-responsive'>"+
-                            "<table class='table table-hover'>"+
+                            "<table class='exampledttbl table table-hover'>"+
                                 "<thead>"+
                                     "<tr>"+
                                         "<th>#</th>"+
                                         "<th>Title</th>"+
                                         "<th>Deskripsi</th>"+
-                                        "<th>Link</th>"+
                                         "<th>act</th>"+
                                     "</tr>"+
                                 "</thead>"+
@@ -76,11 +76,11 @@ function status_userLoadDataAll() {
                         "</div>"+
                     "</div>"+
                 "</div>";
-            $('.class-status_user-view-data').html(status_userDataResult);
+                $('.class-status_user-view-data').html(status_userDataResult);                
+                $('.progress').hide();
             btnact();
         }
     }).done(function() {
-        $('.progress').hide();
     });
 }
 $(document).on('click', '.btn-status_user-form-edit', function() {
@@ -120,28 +120,29 @@ $(document).on('click', '.btn-status_user-form-edit', function() {
     });
 });
 $(document).on('click', '.btn-status_user-form-delete', function() {
-    let dataId = $(this).attr('data');
-    let status_userDeleteDataResult = '';
-    $.ajax({
-        type: 'POST',
-        url: 'status_user_api/load?act=delete&uniq_status_user=' + dataId,
-        contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-        dataType: 'json',
-        data: '',
-        beforeSend: function() {
-            $('.progress').show();
-        },
-        success: function(data) {
-            if (data[0]['status'] == 1) {
-                console.log(data[0]['message']);
-                status_userLoadDataAll();
-            } else if (data[0]['status'] == 2) {
-                console.log(data[0]['message']);
+    if(confirm('akan di hapus permanen')){
+        let dataId = $(this).attr('data');
+        $.ajax({
+            type: 'POST',
+            url: 'status_user_api/load?act=delete&uniq_status_user=' + dataId,
+            contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+            dataType: 'json',
+            data: '',
+            beforeSend: function() {
+                $('.progress').show();
+            },
+            success: function(data) {
+                if (data[0]['status'] == 1) {
+                    console.log(data[0]['message']);
+                    status_userLoadDataAll();
+                } else if (data[0]['status'] == 2) {
+                    console.log(data[0]['message']);
+                }
             }
-        }
-    }).done(function() {
-        $('.progress').hide();
-    });
+        }).done(function() {
+            $('.progress').hide();
+        });
+    }
 });
 $(document).on('submit', '.form-edit-status_user-1649460653564', function() {
     $.ajax({

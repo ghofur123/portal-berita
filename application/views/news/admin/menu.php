@@ -18,31 +18,11 @@
 	<div class='col-md-12'>
 		<div class='panel panel-default'>
 			<div class='panel-heading form-inline'>
-				<div class="input-group">
-                    <input type="text" class="form-control form-keyup-data" id="exampleInputAmount" placeholder="">
-                    <div class="input-group-addon" style='cursor:pointer;'>Cari</div>
-                </div>
 				<button type='button' class='btn-new-data btn btn-primary'>New</button>
             </div>
 			<div class='panel-body'>
 				<div class='table-responsive'>
-					<table id="exampledttbl" class='table-data-class table table-hover display' style='width:100%'>
-						<thead>
-							<tr>
-								<th>#</th>
-								<th>Menu</th>
-								<th>status</th>
-								<th>link</th>
-								<th>act</th>
-							</tr>
-						</thead>
-						<tbody class='class-menu-view-data'>
-						</tbody>
-					</table>
-				</div>
-				<div class='panel-heading form-inline'>
-					<div class='input-group div-paging'>
-					</div>
+					<div class='class-menu-view-data'></div>
 				</div>
 			</div>
 		</div>

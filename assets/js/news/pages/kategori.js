@@ -42,6 +42,7 @@ $(document).on('click', '.btn-close-class', function(){
     btnact();
 });
 function kategoriLoadDataAll() {
+    $('.exampledttbl').hide();
     let kategoriDataResult = '';
     $.ajax({
         type: 'POST',
@@ -61,7 +62,7 @@ function kategoriLoadDataAll() {
                     "</div>"+
                     "<div class='panel-body'>"+
                         "<div class='table-responsive'>"+
-                            "<table class='table table-hover'>"+
+                            "<table class='exampledttbl table table-hover'>"+
                                 "<thead>"+
                                     "<tr>"+
                                         "<th>#</th>"+
@@ -92,11 +93,16 @@ function kategoriLoadDataAll() {
                         "</div>"+
                     "</div>"+
                 "</div>";
-            $('.class-kategori-view-data').html(kategoriDataResult);
+                
+            setTimeout(function(){
+                $('.class-kategori-view-data').html(kategoriDataResult);
+                $('.exampledttbl').DataTable();
+                $('.progress').hide();
+                $('.exampledttbl').show();
+            }, 500);
             btnact();
         }
     }).done(function() {
-        $('.progress').hide();
     });
 }
 $(document).on('click', '.btn-kategori-form-edit', function() {
@@ -154,28 +160,29 @@ $(document).on('click', '.btn-kategori-form-edit', function() {
     });
 });
 $(document).on('click', '.btn-kategori-form-delete', function() {
-    let dataId = $(this).attr('data');
-    let kategoriDeleteDataResult = '';
-    $.ajax({
-        type: 'POST',
-        url: 'kategori_api/load?act=delete&uniq_kategori=' + dataId,
-        contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-        dataType: 'json',
-        data: '',
-        beforeSend: function() {
-            $('.progress').show();
-        },
-        success: function(data) {
-            if (data[0]['status'] == 1) {
-                console.log(data[0]['message']);
-                kategoriLoadDataAll();
-            } else if (data[0]['status'] == 2) {
-                console.log(data[0]['message']);
+    if(confirm('akan di hapus permanen')){
+        let dataId = $(this).attr('data');
+        $.ajax({
+            type: 'POST',
+            url: 'kategori_api/load?act=delete&uniq_kategori=' + dataId,
+            contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+            dataType: 'json',
+            data: '',
+            beforeSend: function() {
+                $('.progress').show();
+            },
+            success: function(data) {
+                if (data[0]['status'] == 1) {
+                    console.log(data[0]['message']);
+                    kategoriLoadDataAll();
+                } else if (data[0]['status'] == 2) {
+                    console.log(data[0]['message']);
+                }
             }
-        }
-    }).done(function() {
-        $('.progress').hide();
-    });
+        }).done(function() {
+            $('.progress').hide();
+        });
+    }
 });
 $(document).on('submit', '.form-edit-kategori-1649408668024', function() {
     $.ajax({

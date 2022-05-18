@@ -10,7 +10,7 @@
               <div class="col-lg-3 col-sm-6 grid-margin mb-5 mb-sm-2">
                 <div class="position-relative image-hover">
                   <img
-                    src="<?php base_url(); ?>../assets/usr/images/dashboard/travel.jpg"
+                    src="<?php base_url(); ?>./assets/usr/images/dashboard/travel.jpg"
                     class="img-fluid"
                     alt="world-news"
                   />
@@ -29,7 +29,7 @@
               <div class="col-lg-3 col-sm-6 mb-5 mb-sm-2">
                 <div class="position-relative image-hover">
                   <img
-                    src="<?php base_url(); ?>../assets/usr/images/dashboard/news.jpg"
+                    src="<?php base_url(); ?>./assets/usr/images/dashboard/news.jpg"
                     class="img-fluid"
                     alt="world-news"
                   />
@@ -48,7 +48,7 @@
               <div class="col-lg-3 col-sm-6 mb-5 mb-sm-2">
                 <div class="position-relative image-hover">
                   <img
-                    src="<?php base_url(); ?>../assets/usr/images/dashboard/art.jpg"
+                    src="<?php base_url(); ?>./assets/usr/images/dashboard/art.jpg"
                     class="img-fluid"
                     alt="world-news"
                   />
@@ -67,7 +67,7 @@
               <div class="col-lg-3 col-sm-6 mb-5 mb-sm-2">
                 <div class="position-relative image-hover">
                   <img
-                    src="<?php base_url(); ?>../assets/usr/images/dashboard/business.jpg"
+                    src="<?php base_url(); ?>./assets/usr/images/dashboard/business.jpg"
                     class="img-fluid"
                     alt="world-news"
                   />
