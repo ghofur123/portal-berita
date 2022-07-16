@@ -30,7 +30,7 @@
                             </div>
                             <div class="col-xl-9 col-lg-9 col-md-9">
                                 <div class="header-banner f-right ">
-                                    <img src="<?php base_url(); echo $url_segment; ?>assets/usr2/img/hero/header_card.jpg" alt="">
+                                    <!--<img src="<?php base_url(); echo $url_segment; ?>assets/usr2/img/hero/header_card.jpg" alt="">-->
                                 </div>
                             </div>
                         </div>

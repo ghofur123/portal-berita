@@ -1,6 +1,5 @@
-<button type='button' class='btn-new-data btn btn-primary'>New</button>
-<div class='col-md-12 form-input-class-all'>
-    <div class='panel panel-primary'>
+<div class='col-md-12 form-input-class-all' style='width:100%; margin:0; padding:0;'>
+    <div class='panel panel-primary col-md-12' style='margin:0; padding:0;'>
         <div class='panel-heading'>
             Berita
         </div>
@@ -28,13 +27,53 @@
                         <label>Kontributor</label>
                         <div class="kontributor-class-view"></div>
                     </div>
+                  <?php 
+                  if($_SESSION["nama_status"] == "Administrator"){
+                    $readOnlyBy = "";
+                    $status = "";
+                    $aktif = "";
+                    $pending = "";
+                    $non_aktif = "";
+                  } else if($_SESSION["nama_status"] == "Admin"){
+                    $readOnlyBy = "readonly";
+                    $status = "";
+                    $aktif = "";
+                    $pending = "";
+                    $non_aktif = "";
+                  } else if($_SESSION["nama_status"] == "Editor"){
+                    $readOnlyBy = "readonly";
+                    $status = "";
+                    $aktif = "selected";
+                    $pending = "";
+                    $non_aktif = "";
+                  }	else if($_SESSION["nama_status"] == "Kontributor"){
+                    $readOnlyBy = "readonly";
+                    $status = "";
+                    $aktif = "";
+                    $pending = "selected";
+                    $non_aktif = "";
+                  } else if($_SESSION["nama_status"] == "User"){
+                    $readOnlyBy = "hidden";
+                    $status = "";
+                    $aktif = "";
+                    $pending = "selected";
+                    $non_aktif = "";
+                  } else{
+                    $readOnlyBy = "hidden";
+                    $status = "";
+                    $aktif = "";
+                    $pending = "selected";
+                    $non_aktif = "";
+                  }
+                  
+                  ?>
                     <div class='form-group col-md-3'>
                         <label>Status publikasi</label>
-                        <select  name="status_publikasi" class="form-control">
+                        <select  name="status_publikasi" class="form-control" <?php echo $readOnlyBy; ?>>
                             <option value="">Pilih Status</option>
-                            <option value="aktif">aktif</option>
-                            <option value="pending">pending</option>
-                            <option value="non aktif">non aktif</option>
+                            <option value="aktif" <?php echo $aktif; ?>>aktif</option>
+                            <option value="pending" <?php echo $pending; ?>>pending</option>
+                            <option value="non aktif" <?php echo $non_aktif; ?>>non aktif</option>
                         </select>
                     </div>
                     <div class='form-group col-md-3'>
@@ -134,11 +173,33 @@
     </div>
 </div>
 
-<div class='class-berita-view-edit-data'></div>
+<!-- <div class='class-berita-view-edit-data'></div> -->
+
+
 <div class='row data-table-rows-all'>
     <div class='col-md-12'>
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Action <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li class="btn-new-data"><a href="#">New Data</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="class-tab-button-btt" data="upload"><a href="#">Upload</a></li>
+                <li class="class-tab-button-btt" data="kontributor"><a href="#">Kontributor</a></li>
+                <li class="class-tab-button-btt" data="editor"><a href="#">Editor</a></li>
+              	<?php if(strtolower($_SESSION["nama_status"]) == "administrator"){ ?>
+              		<li class="class-tab-button-btt" data="check_administrator"><a href="#">Check Data Administrator</a></li>
+              	<?php } ?>
+            </ul>
+        </div>
         <div class='panel panel-default'>
-            <div class='panel-heading form-inline'>
+            <div class='panel-heading form-inline '>
+                <ol class="breadcrumb">
+                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="#">Berita</a></li>
+                    <li class="class-breacdm-type active">Data</li>
+                </ol>
             </div>
             <div class='panel-body'>
                 <div class='table-responsive'>

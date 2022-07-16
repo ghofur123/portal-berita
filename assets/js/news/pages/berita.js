@@ -1,10 +1,10 @@
 $(document).ready(function() {
     $('.uniq_berita').val(new Date().getTime());
     beritaLoadDataAll();
-
+    CKEDITOR.replace('deskripsi');
+    CKEDITOR.replace( 'deskripsi_edit' );
+    $('.class-breacdm-type').html('upload');
 });
-CKEDITOR.replace('deskripsi');
-CKEDITOR.replace( 'deskripsi_edit' );
 $('.btn-new-data').click(function(){
     CKEDITOR.instances['deskripsi'].setData('');
     $('input:text').val('');
@@ -30,12 +30,22 @@ $(document).on('click', '.btn-close-class', function(){
     $('.class-form-input-card2').hide();
     btnact();
 });
-function beritaLoadDataAll() {
+$(document).on('click', '.class-tab-button-btt', function(){
+    let dataValue = $(this).attr('data');
+    beritaLoadDataAll(dataValue);
+    $('.class-breacdm-type').html(dataValue);
+});
+function beritaLoadDataAll(dataType) {
+    if(dataType == ""){
+        var dtTp = '';
+    } else {
+        var dtTp = dataType;
+    }
     $('.exampledttbl').hide();
     let beritaDataResult = '';
     $.ajax({
         type: 'POST',
-        url: 'berita_api/load?act=load',
+        url: 'berita_api/load?act=load&type='+dtTp,
         contentType: 'application/x-www-form-urlencoded; charset=utf-8',
         dataType: 'json',
         data: '',

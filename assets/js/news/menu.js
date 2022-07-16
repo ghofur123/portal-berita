@@ -1,5 +1,6 @@
 $(document).ready(function(){
     loadMenuAll();
+    $('.class-view-content-all').load('dashboard/dashboard_api');
 });
 $(document).on('click','.menu-load-nav-side', function(){
     let linkData = $(this).attr('data');
@@ -62,4 +63,8 @@ $(document).on('click', '.menu-button-cls', function(){
         $('.clpse-class-'+ dataVt).show();
         $('.clpse-class-'+ dataVt).addClass('.transtition-show-click');
     });    
+});
+$(document).on('click', '.class-logout-menu', function(){
+    localStorage.clear();
+    window.location.href = 'login/logout';
 });

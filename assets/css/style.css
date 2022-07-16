@@ -45,3 +45,9 @@
     transition: 10s;
     border: 1px solid #fff;
 }
+.aktifitas-class {
+    display: none;
+}
+.cls-tab-berita {
+    cursor: pointer;
+}

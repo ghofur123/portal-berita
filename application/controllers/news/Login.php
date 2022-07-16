@@ -22,11 +22,12 @@ class Login extends CI_Controller {
 		if($this->form_validation->run() == true){
             $queryLogin = $this->crud_function_model->login("user", $where);
 			if ($queryLogin > 0) {
-                $queryAmbilData = $this->crud_function_model->readData("user", "", $where, "", "");
+                $queryAmbilData = $this->crud_function_model->selectJoinTwoTable("*", "user a", "status_user b", "a.level = b.uniq_status_user", "", $where, "");
 				foreach($queryAmbilData as $item){
 					$arraySession = array( 
 						"uniq_user" => $item["uniq_user"],
-						"nama_user" => $item["nama_user"]
+						"nama_user" => $item["nama_user"],
+                      	"nama_status"	=> $item["nama_status"]
 						);
 					$this->session->set_userdata($arraySession);
 				}
@@ -58,5 +59,20 @@ class Login extends CI_Controller {
     }
     public function login(){
         echo "<script>window.location = '../login';</script>";
+    }
+  	public function aaaaa(){
+      $where = array(
+			"a.username" => 23423,
+			"a.password" => 234234
+		);
+      $queryAmbilData = $this->crud_function_model->selectJoinTwoTable("*", "user a", "status_user b", "a.level = b.uniq_status_user", "", $where, "");
+				foreach($queryAmbilData as $item){
+					/*$arraySession = array( 
+						"uniq_user" => $item["uniq_user"],
+						"nama_user" => $item["nama_user"],
+                      	"nama_status"	=> $item["nama_status"]
+						); */
+					echo $item["nama_status"];
+				}
     }
 }

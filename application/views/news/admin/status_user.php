@@ -1,7 +1,7 @@
 
 <button type='button' class='btn-new-data btn btn-primary'>New</button>
-<div class='col-md-12 form-input-class-all'>
-    <div class='panel panel-primary'>
+<div class='col-md-12 form-input-class-all' style='width:100%; margin:0; padding:0;'>
+    <div class='panel panel-primary' style='margin:0; padding:0;'>
         <div class='panel-heading'>
             Status User
         </div>

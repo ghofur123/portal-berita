@@ -1,6 +1,11 @@
 <nav class="navbar-default navbar-side" role="navigation">
     <div class="sidebar-collapse">
-        <ul class="nav menu-load-db" id="main-menu">
+        <ul class="nav" id="main-menu">
+            <li><a href="#" class="menu-load-nav-side" data="dashboard/dashboard_api">Beranda</a></li>
+        </ul>
+        <ul class="nav menu-load-db" id="main-menu"></ul>
+        <ul class="nav" id="main-menu">
+            <li class="class-logout-menu"><a href="#">Log Out</a></li>
         </ul>
     </div>
 

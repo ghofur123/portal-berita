@@ -55,6 +55,19 @@ class Crud_function_model extends CI_Model {
 		$query = $this->db->get();
 		return $query->result_array();
 	}
+	public function selectJoinTwoTableGroup($select, $table1, $table2, $on2, $left2, $where, $groupBy, $orderBy){
+		$this->db->select($select);
+		$this->db->from($table1);
+		$this->db->join($table2, $on2, $left2);
+		if(empty($where)){
+		} else {
+			$this->db->where($where);
+		}
+		$this->db->group_by($groupBy);
+    	$this->db->order_by($orderBy);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
 	// fix
 	public function selectJointhreeTable($select, $table1, $table2, $on2, $left2, $table3, $on3, $left3, $where, $orderBy){
 		$this->db->select($select);
@@ -66,6 +79,20 @@ class Crud_function_model extends CI_Model {
 			$this->db->where($where);
 		}
     	$this->db->order_by($orderBy);   
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+	public function selectJointhreeTablelimit($select, $table1, $table2, $on2, $left2, $table3, $on3, $left3, $where, $orderBy, $limit){
+		$this->db->select($select);
+		$this->db->from($table1);
+		$this->db->join($table2, $on2, $left2);
+		$this->db->join($table3, $on3, $left3);
+		if(empty($where)){
+		} else {
+			$this->db->where($where);
+		}
+    	$this->db->order_by($orderBy);   
+		$this->db->limit($limit);
 		$query = $this->db->get();
 		return $query->result_array();
 	}

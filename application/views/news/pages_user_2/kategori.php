@@ -89,7 +89,7 @@
                     </div>
                 </div>
                 <div class="news-poster d-none d-lg-block">
-                    <img src="<?php base_url(); echo $url_segment; ?>assets/usr2/img/news/news_card.jpg" alt="">
+                    <!--<img src="<?php base_url(); echo $url_segment; ?>assets/usr2/img/news/news_card.jpg" alt="">-->
                 </div>
             </div>
             </div>

@@ -6,7 +6,7 @@
     </div>
     <!-- /. WRAPPER  -->
     <div id="footer-sec">
-        &copy; 2022 beirta jatim | Design By : <a href="#" target="_blank">beritajatim.com</a>
+        &copy; 2022 Indonesia Mengabari
     </div>
     <!-- /. FOOTER  -->
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
@@ -22,11 +22,13 @@
     <script src="<?php base_url(); ?>../assets/js/news/menu.js"></script>
     <!-- ckeditor -->
     <script src="https://cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script>
-
     <!-- datatables -->
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap.min.js"></script>
-    
+    <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+    <script id="__bs_script__">//<![CDATA[
+    document.write("<script async src='/browser-sync/browser-sync-client.js?v=2.23.3'><\/script>".replace("HOST", location.hostname));
+//]]></script>
 
 </body>
 </html>

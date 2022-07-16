@@ -1,6 +1,11 @@
 let lnkdt = window.location.href.split('/');
-if(lnkdt[5] == 'beranda' || lnkdt[5] == 'berita' || lnkdt[5] == 'kategori' || lnkdt[5] == 'fokus' || lnkdt[5] == 'page') {
+
+if(lnkdt[3] == 'beranda' || lnkdt[3] == 'berita' || lnkdt[3] == 'kategori' || lnkdt[3] == 'fokus' || lnkdt[3] == 'page') {
+
     var linkpage = '../';
-} else if(lnkdt[5] == 'detail') {
+
+} else if(lnkdt[3] == 'detail') {
+
     var linkpage = '../../';
+
 }

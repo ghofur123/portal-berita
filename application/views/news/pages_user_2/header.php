@@ -7,11 +7,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta property="og:type" content= "website" />
         <meta property="og:url" content="<?php echo $link_page; ?>"/>
-        <meta property="og:site_name" content="suara indonesia" />
+        <meta property="og:site_name" content="indonesia mengabari" />
         <meta name="twitter:card" content="summary"/>
-        <meta name="twitter:domain" content="suaraindonesia.co.id"/>
-        <meta name="twitter:title" property="og:title" itemprop="name" content="suara indonesia - <?php echo str_replace("-", " ", $title_url); ?>" />
-        <meta name="twitter:description" property="og:description" itemprop="description" content="suara indonesia - <?php echo str_replace("-", " ", $title_url); ?>" />
+        <meta name="twitter:domain" content="indonesiamengabari.com"/>
+        <meta name="twitter:title" property="og:title" itemprop="name" content="indonesia mengabari - <?php echo str_replace("-", " ", $title_url); ?>" />
+        <meta name="twitter:description" property="og:description" itemprop="description" content="indonesia mengabari - <?php echo str_replace("-", " ", $title_url); ?>" />
         <link rel="shortcut icon" type="image/x-icon" href="../assets/usr2/img/favicon.ico">
 
     <!-- CSS here -->

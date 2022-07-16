@@ -5585,8 +5585,18 @@ b,sup,sub,u,del{
   }
     .fks-itm-lk {
     cursor: pointer;
-}
+    }
   .link-terkait-class a {
       color: rgb(51, 43, 43);
-      text-decoration: underline;
+      /* text-decoration: underline; */
+      background: #2f68a154;
+      padding: 10px;
+  }
+  .tags-class {
+      /* border:1px solid #002e5b; */
+      color: #100f0f;
+      padding: 10px;
+      margin: 10px;
+      border-radius: 10px;
+      background: #ddb2b2;
   }

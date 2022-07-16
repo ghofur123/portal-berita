@@ -25,6 +25,36 @@ class Dashboard extends CI_Controller
         } else {
             echo "<script>window.location = './login';</script>";
         }
+    }
+    public function dashboard_api()
+    {
+        $this->load->view('news/admin/dashboard');
+    }
+    public function dashboard_data_api(){
+            $berita = $this->crud_function_model->readData('berita', '', '', '', '');
+            $kategori = $this->crud_function_model->readData('kategori', '', '', '', '');
+            $fokus_berita = $this->crud_function_model->readData('fokus_berita', '', '', '', '');
+            $user = $this->crud_function_model->readData('user', '', '', '', '');
 
+            $response = array(
+                'data' => array(
+                    'berita' => count($berita),
+                    'kategori' => count($kategori),
+                    'fokus_berita' => count($fokus_berita),
+                    'user' => count($user)
+                )
+            );
+
+            echo json_encode($response);
+    }
+    public function analisis_api(){
+        $berita_analisis = $this->crud_function_model->selectJoinTwoTableGroup('COUNT(*) as jumlah, a.title', 'kategori a', 'berita b', 'a.uniq_kategori = b.kategori_id', '', '', 'a.uniq_kategori',  'a.title ASC');
+        foreach($berita_analisis as $item){
+            $berita_alns[] = $item;
+        }
+        $response = array(
+            'data' => $berita_alns
+        );
+        echo json_encode($response);
     }
 }
